@@ -1,0 +1,53 @@
+{% extends "jobsapp/base.html" %}
+{% block content %}
+
+<div class="container"">
+  <!-- Make another button here for when apply all button has already been used/there are no more jobs to apply to-->
+  <div class="d-flex">
+    <div class="mr-auto p2">
+      <div id="collapsebutton" class="nodisp expandcollapse btn secondary-button no-print rectangular"><i class="glyphicon glyphicon-minus"></i> Collapse All</div>
+      <div id="expandbutton" class="disp expandcollapse btn secondary-outline-button no-print rectangular"><i class="glyphicon glyphicon-plus"></i> Expand All</div>
+    </div>
+    
+  </div>
+  
+
+  {% for jobpost in jobposts %}
+    <div class="card jobcard" id="card{{jobpost.id}}" style="margin-bottom:20px" data-aos="fade-up" data-aos-offset="-1000">
+
+      <div class="card-header">
+        <div class="d-flex">
+          <div class="mr-auto p2">
+            <button class="btn joblink" data-toggle="collapse" data-target="#collapse{{jobpost.id}}" aria-expanded="false" aria-controls="collapse{{jobpost.id}}" style="position:relative;font-weight: bold; font-size: 20px;outline:none;">
+                {{ jobpost.company }} - {{jobpost.position}}
+            </button>
+          </div>
+          <div class="p2">
+            <p class="btn main-button applied-button">Applied</p>
+            <a class="btn secondary-outline-button learnmore-button" href="{{jobpost.info_url}}" style="float: right;" target="_blank">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="collapse{{jobpost.id}}" class="collapse">
+        <div class="card-body">
+          <p style="font-weight: bold; color: black;">{{ jobpost.commitment }} | {{ jobpost.location }} | {{ jobpost.team }} Team</p>
+          <p><span style="font-weight: bold; color: black;">Description: </span>{{ jobpost.description }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <script src="/static/jobsapp/js/my.js"></script>
+
+</div>
+
+
+{% endblock content %}
+
+
+
+
+
+
+          
+

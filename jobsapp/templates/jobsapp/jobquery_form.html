@@ -1,0 +1,30 @@
+{% extends "jobsapp/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<div class="container main-section">
+  <div class="content-section">
+    <form method="POST">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">New Jobquery</legend>
+        {{ form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info newjoblistbtn" type="submit">Create list</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="loadmodal">
+  <h2 class='loadmessage'>Finding Jobs! (This may take a minute)</h2>
+</div>
+
+<script>
+  $('.newjoblistbtn').click(function(){
+    $("body").addClass("loading");
+});
+</script>
+
+  {% endblock content %}

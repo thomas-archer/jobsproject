@@ -1,0 +1,45 @@
+{% extends "jobsapp/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container main-section">
+  <div class="content-section">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <div class="d-flex" style="padding-bottom: -10px;">
+          <legend class="mr-auto p2  mb-4">Profile Info</legend>
+          <h3 class='p2' style="white-space: nowrap;">Applied to <span style="text-decoration: underline;">{{applied_count}}</span> jobs so far</h3>
+
+        </div>
+        <hr style="margin-top: -10px;">
+        <h6 style="font-weight:bold">*Required for one-click apply </h6>
+        {{ u_form|crispy }}
+        {{ p_form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}
+
+
+<!-- <div class="container main-section">
+  <div class="content-section">
+    <<h3>Email: {{user.email}}</h3>
+    <h3>Username: {{ user.username }}</h3>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Profile Info</legend>
+        <h6 style="font-weight:bold">*Required for one-click apply</h6>
+        {{ u_form|crispy }}
+        {{ p_form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Update</button>
+      </div>
+    </form>
+  </div>
+</div> -->

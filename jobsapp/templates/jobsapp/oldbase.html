@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Thomas Archer">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/static/jobsapp/vendor/bootstrap/css/bootstrap.min.css">
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" type="text/css" href="/static/jobsapp/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/static/jobsapp/css/main.css">
+
+
+  <script src="/static/jobsapp/js/my.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="/static/jobsapp/images/favicon.png"/>
+
+
+  {% if title and title != "Home" %}
+    <title>Jobsapp - {{ title }}</title>
+  {% else %}
+    <title>Jobsapp </title>
+  {% endif %}
+</head>
+<body class="all">
+
+  <!-- <div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+  </div>   -->
+
+  <header class="">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="" href="{% url 'jobsapp-home' %}" style="margin-top: -8px;"><img class="navbar-brand" src="/static/jobsapp/images/logo-white.png" width="150"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'jobsapp-home' %}">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"{% if request.path == url %} class="active"{% endif %} href="{% url 'jobsapp-about' %}">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'jobposts-list' %}">My Joblist</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'jobsapp-contact' %}">Contact</a>
+            </li>
+          </ul>
+        </div>
+        <div class="functional-buttons">
+          <ul>
+          {% if user.is_authenticated %}
+            <li><a class="nav-item nav-link" href="{% url 'logout' %}">Log out</a></li>
+            <li><a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a></li>
+          {% else %}
+            <li><a class="nav-item nav-link" href="{% url 'login' %}">Login</a></li>
+            <li><a class="nav-item nav-link" href="{% url 'register' %}">Register</a></li>
+          {% endif %}
+<!-- 
+            
+            <li><a href="#">Log in</a></li>
+            <li><a href="#">Sign Up</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+
+
+
+
+  <div class="main">
+    {% if title != "Home" %}
+    <div class="page-heading header-text" style="text-align: left;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12" style="">
+            <h1>{{ title }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+  {% block content %}
+  {% endblock %}
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="/static/jobsapp/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/jobsapp/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/jobsapp/js/custom.js"></script>
+
+
+  <script language = "text/Javascript"> 
+    cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+    function clearField(t){                   //declaring the array outside of the
+    if(! cleared[t.id]){                      // function makes it static and global
+        cleared[t.id] = 1;  // you could use true and false, but that's more typing
+        t.value='';         // with more chance of typos
+        t.style.color='#fff';
+        }
+    }
+  </script>
+
+  <!-- <script>
+    $body = $("body");
+
+    $(document).on({
+      ajaxStart: function() { $body.addClass("loading");    },
+      ajaxStop: function() { $body.removeClass("loading"); }    
+  });
+  </script> -->
+
+  {% if messages %}
+      {% for message in messages %}
+      <script>
+        alert("{{message}}")
+      </script>
+      {% endfor %}
+  {% endif %}
+
+</body>
+
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p>Copyright &copy; 2020 Jobsapp - <a href="https://thomas-archer.github.io/" target="_blank">Thomas Archer</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+</html>
+
+
+
+
+
+
+
+

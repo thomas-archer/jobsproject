@@ -1,0 +1,113 @@
+{% extends "jobsapp/base.html" %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+
+
+<div class="container">
+  <h1 class="mb-3" style='font-weight:bold; text-transform: uppercase;'>{{ jobquery_display }} - Job Posts</h1>
+
+  
+
+  <!-- Make another button here for when apply all button has already been used/there are no more jobs to apply to-->
+  <div class="d-flex">
+    <div class="mr-auto p2">
+      <div id="collapsebutton" class="nodisp expandcollapse btn secondary-button no-print rectangular"><i class="glyphicon glyphicon-minus"></i> Collapse All</div>
+      <div id="expandbutton" class="disp expandcollapse btn secondary-outline-button no-print rectangular"><i class="glyphicon glyphicon-plus"></i> Expand All</div>
+    </div>
+
+    <button class="btn secondary-button" onclick="unavailable()" style="float: right;">Apply to all jobs</button>
+    <script>
+      function unavailable() {
+        alert('"Apply to All" feature is not available on the sample page');
+      }
+    </script>
+
+  </div>
+
+  
+
+  {% for jobpost in jobposts %}
+    <div class="card jobcard" id="card{{jobpost.id}}" style="margin-bottom:20px" data-aos="fade-up" data-aos-offset="-1000">
+      <div class="card-header">
+        <div class="d-flex">
+          <div class="mr-auto p2">
+            <button class="btn joblink" data-toggle="collapse" data-target="#collapse{{jobpost.id}}" aria-expanded="false" aria-controls="collapse{{jobpost.id}}" style="position:relative;font-weight: bold; font-size: 20px;outline:none;">
+                {{ jobpost.company }} - {{jobpost.position}}
+            </button>
+          </div>
+          <div class="p2">
+            {% if user.is_authenticated %}
+            <a class="btn secondary-button apply-button" id="apply{{ jobpost.id }}" href="javascript:void();" data-jobid="{{ jobpost.id }}" style="float: right; margin-bottom: 5px;">Apply</a>
+            {% else %}
+            <a class="btn secondary-button fake-apply-button" onclick="login_required()" href="javascript:void();" style="float: right; margin-bottom: 5px;">Apply</a>
+            <script>
+              function login_required() {
+                alert("Login Required For Quick Apply");
+              }
+            </script>
+            {% endif %}
+            <!-- <p class="btn btn-success" style="float: right;">Applied</p> -->
+            <a class="btn secondary-outline-button learnmore-button" href="{{jobpost.info_url}}" style="float: right;" target="_blank">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="collapse{{jobpost.id}}" class="collapse">
+        <div class="card-body">
+          <p style="font-weight: bold; color: black;">{{ jobpost.commitment }} | {{ jobpost.location }} | {{ jobpost.team }} Team</p>
+          <p><span style="font-weight: bold; color: black;">Description: </span>{{ jobpost.description }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <script src="/static/jobsapp/js/my.js"></script>
+
+  </div>
+
+</div>
+<div class="loadmodal">
+  <h2 class='loadmessage'>Applying to jobs!</h2>
+</div>
+
+
+{% endblock content %}
+
+
+
+<!-- 
+{% for jobpost in jobposts %}
+    <div class="card-header">
+        <button class="btn joblink" data-toggle="collapse" data-target="#collapse{{jobpost.id}}" aria-expanded="false" aria-controls="collapse{{jobpost.id}}" style="position:relative;">
+          {{ jobpost.company }} - {{jobpost.position}}
+        </button>
+
+        {% if user.is_authenticated %}
+        <a class="applybutton btn btn-primary" id="apply{{jobpost.id}}" href="javascript:void();" data-jobid="{{ jobpost.id }}" style="float: right;">Apply</a>
+        {% else %}
+        <a class="fakeapplybutton btn btn-primary" onclick="login_required()" style="float: right; color:#fff;">Apply</a>
+        <script>
+          function login_required() {
+            alert("Login Required For Quick Apply");
+          }
+        </script>
+        {% endif %}
+        <a class="btn btn-info" href="{{jobpost.info_url}}" style="float: right; margin-right: 5px;" target="_blank">Learn More</a>
+        
+    </div>
+    <div id="collapse{{jobpost.id}}" class="collapse" aria-labelledby="heading{{jobpost.id}}" data-parent="#accordion">
+      <div class="card-body">
+        <h6 style="font-weight: bold; color: black;">{{ jobpost.commitment }} | {{ jobpost.location }} | {{ jobpost.team }} Team</h6>
+        <p><span style="font-weight: bold; color: black;">Description: </span>{{ jobpost.description }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  <script src="/static/jobsapp/js/my.js"></script>
+
+</div>
+<div class="loadmodal">
+<h2 class='loadmessage'>Applying to jobs!</h2>
+</div> -->
+
+
