@@ -95,7 +95,6 @@ def autofill_lever(applicant_data,application_url):
     raw_inputs = page.find('form').find_all(['input','textarea','select'])
     # custom_questions = page.find_all('li',{'class':'application-question custom-question'})
     #Setting attributes to make things easier
-    print('here!')
     def cleaning(raw):
         current_marked='...../'
         for i in raw:
@@ -168,7 +167,7 @@ def autofill_lever(applicant_data,application_url):
             label_input_name = l.find_all(['input','textarea','select'])[0]['name']
             if "authorized" in label_text or "legally" in label_text or 'authorization' in label_text:
                 form.set(label_input_name,'Yes')
-            elif 'sponsorship' in label_text or ('required' in label_text and 'visa' in label_text.lower()):
+            if 'sponsorship' in label_text or ('require' in label_text and 'visa' in label_text.lower()):
                 form.set(label_input_name,'No')
         except:
             pass

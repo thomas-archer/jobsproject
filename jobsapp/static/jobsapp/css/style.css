@@ -16,6 +16,25 @@
   text-align: left;
 }
 
+.accordion-list li {
+  cursor: pointer;
+}
+
+.accordion-list p {
+  cursor: text;
+}
+
+.faq-list li {
+	cursor: pointer;
+}
+
+.faq-list p {
+  cursor: text;
+}
+
+.container-fluid {
+  width: 80%;
+}
 
 
 /*--------------------------------------------------------------

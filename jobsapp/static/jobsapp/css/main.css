@@ -185,14 +185,13 @@ body.loading .loadmodal {
 
 
 
-
 /* Below */
 
 p {
 	margin-bottom: 0px;
 	font-size: 14px;
 	/* color: #6a6a6a; */
-	color:black
+	color:black;
 	line-height: 25px;
 }
 

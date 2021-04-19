@@ -212,7 +212,8 @@ def applyAllJobs(request):
             applicant_data['resume'] = str(applicant.resume.path)
             applicant_data['email']=request.user.email
             applicant_data['urls[LinkedIn]'] = applicant_data.pop('linkedin_URL')
-        except:
+        except Exception as e:
+            print(e)
             return HttpResponse('missing_profile_info')
         applicant_data['urls[Twitter]'] = applicant_data.pop('twitter_URL')
         applicant_data['urls[GitHub]'] = applicant_data.pop('github_URL')
@@ -225,7 +226,8 @@ def applyAllJobs(request):
                     appliedpost.delete()
                 else:
                     request.user.profile.applied_posts.add(appliedpost)
-            except:
+            except Exception as e:
+                print(e)
                 failed_count+=1
                 pass  
         if failed_count==0:
@@ -255,6 +257,7 @@ def applyToJob(request):
             applicant_data['email']=request.user.email
             applicant_data['urls[LinkedIn]'] = applicant_data.pop('linkedin_URL')
         except:
+            print
             return HttpResponse('missing_profile_info')
         applicant_data['urls[Twitter]'] = applicant_data.pop('twitter_URL')
         applicant_data['urls[GitHub]'] = applicant_data.pop('github_URL')
